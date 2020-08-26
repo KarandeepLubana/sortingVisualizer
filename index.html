@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sorting Visualizer</title>
+    <link rel="stylesheet" href="./main.css">
+</head>
+<body>
+    <nav>
+        <div class="sort">
+            <div id="range">
+                <h1>Array Length</h1>
+                <input type="range" id="rangeArr" min="10" max="100" value="20"> 
+                <span id="displayLength">20</span>
+                <h1>Sorting Time</h1> 
+                <input type="range" id="speed" min="1" max="400" value="370"><span id="displaySpeed">370</span>
+            </div>
+            
+            <div class="sorting-group">
+                <h1>Sorting Algorithm:</h1>
+                <select name="" id="algo-select">
+                    <option value="" selected='selected' disabled="disabled">Select Algorithm</option>
+                    <option value="bubbleSort">Bubble sort</option>
+                    <option value="selectionSort">Selection sort</option>
+                    <option value="insertionSort">Insertion sort</option>
+                </select>    
+            </div>
+
+            <div class="cta">Start Sorting</div>
+        </div>
+    </nav>
+
+    <canvas id="canvas" width="1200px" height="650px"></canvas>
+
+    <script src="./app.js"></script>
+</body>
+</html>
