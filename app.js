@@ -93,7 +93,6 @@ function drawArray(arr, idx1 = -1, idx2 = -1, operation) {
       ctx.fillStyle = "rgb(0, 255, 0)";
     } else if (i == idx1 && operation === "pivot") {
       ctx.fillStyle = "rgb(128, 0, 128)";
-      console.log("purple");
     } else {
       ctx.fillStyle = "rgb(64, 224, 208)";
     }
@@ -126,7 +125,6 @@ async function bubbleSort() {
         let temp = arr[j];
         arr[j] = arr[j + 1];
         arr[j + 1] = temp;
-        console.log("hi");
         await drawArray(arr, j, j + 1, "swap");
         await sleep(delay);
       }
@@ -241,7 +239,6 @@ async function merge(start, mid, end) {
       start2++;
     }
     await drawArray(arr);
-    // await sleep(delay)
   }
   return Promise.resolve();
 }
