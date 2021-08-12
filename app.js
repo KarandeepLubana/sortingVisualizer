@@ -43,14 +43,9 @@ startSortingBtn.addEventListener("click", () => {
       disableArray();
     } else if (algoSelect.value === "mergeSort") {
       mergeSortCaller();
-      startSortingBtn.classList.add("disable-btn");
       disableArray();
     } else if (algoSelect.value === "quickSort") {
-      console.log("Clicked Original", arr);
       quickSortCaller();
-      //   let p = partition(0, arr.length)
-      //   console.log("Partitioned:", arr)
-      //   console.log(p)
       startSortingBtn.classList.add("disable-btn");
       disableArray();
     }
@@ -60,7 +55,6 @@ startSortingBtn.addEventListener("click", () => {
 // Getting sorting speed from slider
 sortSpeed.addEventListener("input", () => {
   delay = sortSpeed.value;
-  // console.log(delay);
   displaySpeed.innerHTML = delay;
 });
 
@@ -85,7 +79,6 @@ function generateNewArray(arrLength) {
 function suffleArray(arr) {
   arr.sort(() => Math.random() - 0.5);
   drawArray(arr);
-  // return arr;
 }
 
 // Draws array on canvas
@@ -111,7 +104,7 @@ function drawArray(arr, idx1 = -1, idx2 = -1, operation) {
 
 // slows down the sorting speed when used in async sorting function with await
 function sleep(miliseconds) {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     setTimeout(() => {
       resolve();
     }, miliseconds);
@@ -121,7 +114,6 @@ function sleep(miliseconds) {
 // takes in index of two compared values so that they can be displayed in different color
 async function compare(idx1, idx2) {
   await drawArray(arr, idx1, idx2, "compare");
-  // await sleep(20)
 }
 
 async function bubbleSort() {
@@ -138,8 +130,6 @@ async function bubbleSort() {
         await drawArray(arr, j, j + 1, "swap");
         await sleep(delay);
       }
-      // await drawArray(arr, -1, -1, 'valueSorted');
-      // await sleep(100)
     }
   }
   await drawArray(arr);
@@ -194,15 +184,13 @@ async function insertionSort() {
   drawArray(arr);
   startSortingBtn.classList.remove("disable-btn");
   rangeArr.disabled = false;
-  console.log("Insertion: ", arr);
 }
 
 async function mergeSortCaller() {
+  startSortingBtn.classList.add("disable-btn");
   await mergeSort(0, arr.length - 1);
   startSortingBtn.classList.remove("disable-btn");
   rangeArr.disabled = false;
-
-  console.log(`Katham: ${arr}`);
 }
 
 async function mergeSort(l, r) {
@@ -241,7 +229,7 @@ async function merge(start, mid, end) {
         await sleep(delay);
         arr[index] = arr[index - 1];
         index--;
-        await drawArray(arr);
+        await drawArray(arr, index, index - 1, "swap");
       }
       arr[start] = value;
 
@@ -253,6 +241,7 @@ async function merge(start, mid, end) {
       start2++;
     }
     await drawArray(arr);
+    // await sleep(delay)
   }
   return Promise.resolve();
 }
@@ -261,14 +250,11 @@ async function quickSortCaller() {
   await quickSort(0, arr.length - 1);
   startSortingBtn.classList.remove("disable-btn");
   rangeArr.disabled = false;
-
-  console.log(arr);
 }
 
 async function quickSort(start, end) {
   if (start < end) {
     const p = await partition(start, end);
-    console.log(p, "Partition index");
     await quickSort(start, p - 1);
     await quickSort(p + 1, end);
     await drawArray(arr);
@@ -277,7 +263,6 @@ async function quickSort(start, end) {
 }
 
 async function partition(start, end) {
-  //   debugger;
   await drawArray(arr, start, -1, (operation = "pivot"));
   await sleep(delay);
 
